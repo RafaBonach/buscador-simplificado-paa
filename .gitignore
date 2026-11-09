@@ -7,4 +7,4 @@ uv.lock
 # Base de dados
 data/**
 
-*/__pycache__/**
+**/__pycache__/**
