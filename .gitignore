@@ -1,0 +1,10 @@
+venv/**
+.venv
+*.toml
+uv.lock
+#*.md
+
+# Base de dados
+data/**
+
+*/__pycache__/**
