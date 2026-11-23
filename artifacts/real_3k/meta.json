@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "params": {
+    "chunk_size": 800,
+    "overlap": 120,
+    "max_chunks": 3000,
+    "max_docs": null,
+    "min_doc_chars": 200
+  },
+  "ingest": {
+    "docs": 74,
+    "chunks": 3035,
+    "chars": 2113847,
+    "seconds": 0.11,
+    "bytes": 2490368
+  },
+  "methods": {
+    "cosine": {
+      "vocab": 33286,
+      "nnz": 171805,
+      "min_df": 1,
+      "build_seconds": 2.01,
+      "bytes": 2647241
+    },
+    "word2vec_average": {
+      "dim": 100,
+      "vocab": 33714,
+      "train_chunks": 3035,
+      "epochs": 5,
+      "min_count": 1,
+      "build_seconds": 1.96,
+      "bytes": 29250280
+    },
+    "sentence_embeddings": {
+      "model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "dim": 384,
+      "dtype": "float16",
+      "max_seq_length": 256,
+      "build_seconds": 136.05,
+      "bytes": 2331008
+    },
+    "hnsw": {
+      "backend": "faiss",
+      "M": 16,
+      "ef_construction": 200,
+      "ef_search": 64,
+      "space": "cosine",
+      "build_seconds": 0.37,
+      "bytes": 5098110
+    }
+  },
+  "skipped": {},
+  "available_methods": [
+    "cosine",
+    "word2vec_average",
+    "sentence_embeddings",
+    "hnsw"
+  ]
+}

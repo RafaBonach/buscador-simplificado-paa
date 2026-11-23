@@ -1,1 +1,14 @@
+# Para quem não usa o uv:  pip install -r requirements.txt   (Python 3.12 ou 3.13)
+# Com uv, as dependências ficam no pyproject.toml: `uv sync`.
 streamlit>=1.28.0
+numpy>=1.26
+scipy>=1.11
+scikit-learn>=1.5
+joblib>=1.3
+gensim>=4.3.3
+faiss-cpu>=1.8          # HNSW. Alternativa: hnswlib>=0.8.0 (PyPI só publica código-fonte; pode exigir compilador C++)
+sentence-transformers>=3.2
+torch>=2.4
+transformers>=4.46
+datasets>=3.1
+huggingface_hub>=0.25

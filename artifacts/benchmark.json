@@ -1,0 +1,105 @@
+{
+  "index": {
+    "chunks": 3035,
+    "docs": 74,
+    "top_k": 5,
+    "queries": 30,
+    "repeats": 5
+  },
+  "methods": {
+    "cosine": {
+      "latency_ms": {
+        "mean": 0.580775332734144,
+        "p50": 0.45235001016408205,
+        "p95": 1.1495800019474702,
+        "min": 0.41799999598879367,
+        "max": 1.9420999888097867
+      },
+      "queries_per_second": 1721.8362138285934,
+      "build_seconds": 2.01,
+      "index_bytes": 2647241,
+      "complexity": {
+        "build": "O(T) — T = tokens do corpus (CountVectorizer + IDF)",
+        "query": "O(Σ postings dos termos da pergunta) — matriz termo×chunk funciona como índice invertido",
+        "memory": "O(nnz) — esparsa"
+      },
+      "quality": {
+        "hit_at_k": 0.9,
+        "mrr": 0.8527777777777777,
+        "recall_at_k": 0.9
+      }
+    },
+    "word2vec_average": {
+      "latency_ms": {
+        "mean": 0.22422733357719457,
+        "p50": 0.1441999920643866,
+        "p95": 0.6850899997516537,
+        "min": 0.13120000949129462,
+        "max": 0.9331000037491322
+      },
+      "queries_per_second": 4459.759584376143,
+      "build_seconds": 1.96,
+      "index_bytes": 29250280,
+      "complexity": {
+        "build": "O(T · épocas · janela · (1+neg)) para treinar + O(T) para a média por chunk",
+        "query": "O(|q|·d + N·d) — varredura exata",
+        "memory": "O(N·d) float32"
+      },
+      "quality": {
+        "hit_at_k": 0.4,
+        "mrr": 0.275,
+        "recall_at_k": 0.4
+      }
+    },
+    "sentence_embeddings": {
+      "latency_ms": {
+        "mean": 14.810676000585469,
+        "p50": 14.77155000611674,
+        "p95": 16.5720000048168,
+        "min": 12.685800000326708,
+        "max": 17.16790000500623
+      },
+      "queries_per_second": 67.51886274201595,
+      "build_seconds": 136.05,
+      "index_bytes": 2331008,
+      "complexity": {
+        "build": "O(N · custo do transformer) — domina: ~O(L·n²·d) por chunk",
+        "query": "O(encode(q) + N·d) — varredura exata",
+        "memory": "O(N·d) float16"
+      },
+      "quality": {
+        "hit_at_k": 0.9666666666666667,
+        "mrr": 0.8344444444444445,
+        "recall_at_k": 0.9666666666666667
+      }
+    },
+    "hnsw": {
+      "latency_ms": {
+        "mean": 12.515372666627323,
+        "p50": 12.59820000268519,
+        "p95": 13.677989999268904,
+        "min": 9.996199994930066,
+        "max": 14.054999992367812
+      },
+      "queries_per_second": 79.90173578023249,
+      "build_seconds": 0.37,
+      "index_bytes": 5098110,
+      "complexity": {
+        "build": "O(N · log N · M · ef_construction · d) sobre os embeddings",
+        "query": "O(encode(q) + ef · log N · d) — aproximada",
+        "memory": "O(N·d + N·M) — vetores + grafo"
+      },
+      "quality": {
+        "hit_at_k": 0.9666666666666667,
+        "mrr": 0.8344444444444445,
+        "recall_at_k": 0.9666666666666667
+      },
+      "recall_vs_exact_embeddings": 1.0
+    }
+  },
+  "ranking": {
+    "fastest_query": "word2vec_average",
+    "best_quality_mrr": "cosine",
+    "best_tradeoff": "cosine"
+  }
+}

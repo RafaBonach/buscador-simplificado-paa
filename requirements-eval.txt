@@ -1,0 +1,6 @@
+# Avaliação com RAGAS usando juiz LOCAL (comando: evaluate --ragas). Instale além do requirements.txt.
+# A integração (EvaluationDataset, LangchainLLMWrapper) foi escrita para a API 0.2.x/0.3.x do RAGAS.
+ragas>=0.2,<0.4
+pandas>=2.0
+langchain-huggingface        # juiz e embeddings locais via Hugging Face
+langchain-openai             # só se o juiz for um servidor local OpenAI-compatível (Ollama, llama.cpp, vLLM)
